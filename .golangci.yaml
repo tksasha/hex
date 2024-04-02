@@ -1,0 +1,32 @@
+run:
+linters:
+  enable-all: true
+  disable:
+    ### deprecated, archived or obsolette by authors
+    - deadcode
+    - exhaustivestruct
+    - gci
+    - golint
+    - ifshort
+    - interfacer
+    - maligned
+    - nosnakecase
+    - paralleltest
+    - scopelint
+    - structcheck
+    - varcheck
+    ### disabled by me
+    - depguard
+    - exhaustruct
+    - godot
+    - godox
+    - gofumpt
+    - noctx # TODO: ???
+    - perfsprint # TODO: ???
+    - varnamelen
+    - wrapcheck
+issues:
+  exclude-rules:
+    - linters:
+      - revive
+      text: "blank-imports"
