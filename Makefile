@@ -1,5 +1,7 @@
 GOFMT=find . -name *.go -exec gofmt -l -s -w {} \;
 GOLINT=golangci-lint run
+APP=main.go
+BINARY=hex
 
 .PHONY: all
 all: vet fix fmt lint

@@ -6,19 +6,23 @@ import (
 	"fmt"
 )
 
+const (
+	objectIDLength = 12
+)
+
 func main() {
 	id, err := objectID()
 	if err != nil {
-		fmt.Printf("ERROR -> %v\n", err)
+		fmt.Printf("ERROR -> %v\n", err) //nolint:forbidigo
 
 		return
 	}
 
-	fmt.Println(id)
+	fmt.Println(id) //nolint:forbidigo
 }
 
 func objectID() (string, error) {
-	bytes := make([]byte, 12)
+	bytes := make([]byte, objectIDLength)
 
 	if _, err := rand.Read(bytes); err != nil {
 		return "", err
