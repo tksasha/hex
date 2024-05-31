@@ -1,3 +1,6 @@
+SRC=main.go
+BIN=hex
+
 .PHONY: all
 all: vet fix fmt lint test
 
@@ -33,3 +36,15 @@ prepare:
 	go get mvdan.cc/gofumpt@latest
 	go install mvdan.cc/gofumpt@latest
 	go mod tidy
+
+.PHONY: run
+run:
+	go run $(SRC)
+
+.PHONY: build
+build:
+	go build -o $(BIN) $(SRC)
+
+.PHONY: install
+install:
+	go install
