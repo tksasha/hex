@@ -1,10 +1,5 @@
-GOFMT=find . -name *.go -exec gofmt -l -s -w {} \;
-GOLINT=golangci-lint run
-APP=main.go
-BINARY=hex
-
 .PHONY: all
-all: vet fix fmt lint
+all: vet fix fmt lint test
 
 .PHONY: vet
 vet:
@@ -19,17 +14,22 @@ fix:
 .PHONY: fmt
 fmt:
 	@echo "go fmt"
-	@$(GOFMT)
+	@gofumpt -l -w .
 
 .PHONY: lint
 lint:
 	@echo "go lint"
-	@$(GOLINT)
+	@golangci-lint run
 
-.PHONY: build
-build:
-	go build -o $(BINARY) $(APP)
+.PHONY: test
+test:
+	@echo "go test"
+	@go test ./...
 
-.PHONY: clean
-clean:
-	rm -rf $(BINARY)
+.PHONY: prepare
+prepare:
+	go get github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+	go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+	go get mvdan.cc/gofumpt@latest
+	go install mvdan.cc/gofumpt@latest
+	go mod tidy
